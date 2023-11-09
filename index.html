@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="steelers.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="steelers.ico" type="image/x-icon" />
     <title>3 Rivers Showdahn</title>
     <link
       rel="stylesheet"
@@ -45,6 +45,10 @@
         background-color: #101820;
         border-color: #101820;
       }
+      .alert {
+        color: red;
+        font-weight: bolder;
+      }
       .btn-primary:not(:disabled):not(.disabled):active,
       .btn-primary:not(:disabled):not(.disabled).active,
       .show > .btn-primary.dropdown-toggle {
@@ -60,7 +64,7 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="text-center mb-4">Steelers Trivia Game</h1>
+      <h1 class="text-center mb-4">Three Rivers Trivia Showdahn</h1>
       <div id="game">
         <div class="form-group">
           <input
@@ -70,6 +74,7 @@
             placeholder="Enter your name"
           />
         </div>
+        <div id="timer" class="text-center my-3 alert"></div>
         <button class="btn btn-primary btn-block" id="12" onclick="startGame()">
           Start Quiz
         </button>
@@ -81,54 +86,74 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-    const questionTest = [
-  {
-    question: "Who was the Steelers' original founder?",
-    options: ["Art Rooney", "Dan Rooney", "Chuck Noll", "Bill Cowher"],
-    answer: "Art Rooney",
-  },
-  {
-    question: "Which team did the Steelers beat in the 'Immaculate Reception' game?",
-    options: ["Dallas Cowboys", "Oakland Raiders", "Baltimore Colts", "Cleveland Browns"],
-    answer: "Oakland Raiders",
-  },
-  {
-    question: "How many Super Bowls did the Steelers win in the 1970s?",
-    options: ["Two", "Three", "Four", "Five"],
-    answer: "Four",
-  },
-  {
-    question: "What is the name of the Steelers' mascot?",
-    options: ["Steel Man", "Blitzburgh", "Steely McBeam", "Iron Fan"],
-    answer: "Steely McBeam",
-  },
-  {
-    question: "Who holds the record for the most receiving yards in a single season for the Steelers?",
-    options: ["Hines Ward", "Lynn Swann", "John Stallworth", "Antonio Brown"],
-    answer: "Antonio Brown",
-  },
-  {
-    question: "Who was the head coach of the Steelers from 1969 to 1991?",
-    options: ["Mike Tomlin", "Bill Cowher", "Chuck Noll", "Buddy Parker"],
-    answer: "Chuck Noll",
-  },
-  {
-    question: "What year did the Steelers win their 'Sixthburgh' Super Bowl?",
-    options: ["2005", "2008", "2010", "1979"],
-    answer: "2008",
-  },
-  {
-    question: "Which former Steelers player is known for his signature 'Pittsburgh Pile Drivers'?",
-    options: ["James Harrison", "Terry Bradshaw", "Mean Joe Greene", "Jack Lambert"],
-    answer: "Mean Joe Greene",
-  },
-  {
-    question: "In what year did the Steelers merge with the Philadelphia Eagles to form the 'Steagles' due to player shortages during WWII?",
-    options: ["1943", "1952", "1964", "1970"],
-    answer: "1943",
-  },
-];
-    const questionLive = [
+      const questionTest = [
+        {
+          question: "Who was the Steelers' original founder?",
+          options: ["Art Rooney", "Dan Rooney", "Chuck Noll", "Bill Cowher"],
+          answer: "Art Rooney",
+        },
+        {
+          question:
+            "Which team did the Steelers beat in the 'Immaculate Reception' game?",
+          options: [
+            "Dallas Cowboys",
+            "Oakland Raiders",
+            "Baltimore Colts",
+            "Cleveland Browns",
+          ],
+          answer: "Oakland Raiders",
+        },
+        {
+          question: "How many Super Bowls did the Steelers win in the 1970s?",
+          options: ["Two", "Three", "Four", "Five"],
+          answer: "Four",
+        },
+        {
+          question: "What is the name of the Steelers' mascot?",
+          options: ["Steel Man", "Blitzburgh", "Steely McBeam", "Iron Fan"],
+          answer: "Steely McBeam",
+        },
+        {
+          question:
+            "Who holds the record for the most receiving yards in a single season for the Steelers?",
+          options: [
+            "Hines Ward",
+            "Lynn Swann",
+            "John Stallworth",
+            "Antonio Brown",
+          ],
+          answer: "Antonio Brown",
+        },
+        {
+          question: "Who was the head coach of the Steelers from 1969 to 1991?",
+          options: ["Mike Tomlin", "Bill Cowher", "Chuck Noll", "Buddy Parker"],
+          answer: "Chuck Noll",
+        },
+        {
+          question:
+            "What year did the Steelers win their 'Sixthburgh' Super Bowl?",
+          options: ["2005", "2008", "2010", "1979"],
+          answer: "2008",
+        },
+        {
+          question:
+            "Which former Steelers player is known for his signature 'Pittsburgh Pile Drivers'?",
+          options: [
+            "James Harrison",
+            "Terry Bradshaw",
+            "Mean Joe Greene",
+            "Jack Lambert",
+          ],
+          answer: "Mean Joe Greene",
+        },
+        {
+          question:
+            "In what year did the Steelers merge with the Philadelphia Eagles to form the 'Steagles' due to player shortages during WWII?",
+          options: ["1943", "1952", "1964", "1970"],
+          answer: "1943",
+        },
+      ];
+      const questionLive = [
         {
           question: "What year was the Pittsburgh Steelers founded?",
           options: ["1933", "1945", "1950", "1960"],
@@ -241,24 +266,77 @@
           currentQuestionIndex++;
           showQuestion();
         } else {
+          clearInterval(timerInterval);
           let resultsHtml = `<h2 class="text-center">Game Over, ${userName}!</h2>
     <h2 class="text-center">Your score is: ${score}</h2>`;
 
           if (incorrectAnswers.length > 0) {
-            resultsHtml += `<div class="mt-4 mb-4"><h3>You suck and got these questions wrong:</h3><ul class="list-group">`;
+            resultsHtml += `<div class="mt-4 mb-4 text-center"><h3>Shame on you! You got these questions wrong:</h3><ul class="list-group">`;
             incorrectAnswers.forEach((item) => {
               resultsHtml += `<li class="list-group-item list-group-item-warning">${item.question}<br><small>Correct answer: ${item.correct}</small></li>`;
             });
             resultsHtml += `</ul></div>`;
           }
 
-        //   resultsHtml += `<button class="btn btn-primary btn-block" onclick="location.reload()">Play Again</button>`;
+          //   resultsHtml += `<button class="btn btn-primary btn-block" onclick="location.reload()">Play Again</button>`;
           document.getElementById("quiz").innerHTML = resultsHtml;
         }
       }
 
+      let timerInterval;
+
+      function startTimer(duration, display) {
+        let timer = duration,
+          minutes,
+          seconds;
+        timerInterval = setInterval(function () {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
+
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+
+          display.textContent = minutes + ":" + seconds;
+
+          if (--timer < 0) {
+            timer = duration;
+          }
+
+          if (timer === 0) {
+            clearInterval(timerInterval);
+            endQuiz();
+          }
+        }, 1000);
+      }
+
+      function endQuiz() {
+        clearInterval(timerInterval);
+        document.getElementById("quiz").innerHTML =
+          `<h2 class="text-center">Time's up, ${userName}!</h2>` +
+          document.getElementById("quiz").innerHTML;
+        let resultsHtml = `<h2 class="text-center">Game Over, ${userName}!</h2>
+    <h2 class="text-center">Your score is: ${score}</h2>`;
+
+        if (incorrectAnswers.length > 0) {
+          resultsHtml += `<div class="mt-4 mb-4 text-center"><h3>Shame on you! You got these questions wrong:</h3><ul class="list-group">`;
+          incorrectAnswers.forEach((item) => {
+            resultsHtml += `<li class="list-group-item list-group-item-warning">${item.question}<br><small>Correct answer: ${item.correct}</small></li>`;
+          });
+          resultsHtml += `</ul></div>`;
+        }
+
+        //   resultsHtml += `<button class="btn btn-primary btn-block" onclick="location.reload()">Play Again</button>`;
+        document.getElementById("quiz").innerHTML = resultsHtml;
+      }
+
+      function startGame() {
+        userName = document.getElementById("nameInput").value;
+        document.getElementById("nameInput").parentNode.style.display = "none";
+        document.getElementById("12").style.display = "none";
+        // Start the timer with 3 minutes (3 * 60 seconds)
+        startTimer(180, document.querySelector("#timer"));
+        showQuestion();
+      }
     </script>
   </body>
 </html>
-
-
