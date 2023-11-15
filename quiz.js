@@ -1,6 +1,6 @@
-const url = 'https://script.google.com/macros/s/AKfycbxPdNTt_3hJ-8JTBS4qz9QFqcb0FTgdXrjvNWSVunm_Qalj1v36ZcDpLBC7BvO1pgrE/exec'
+const url =
+  "https://script.google.com/macros/s/AKfycbxPdNTt_3hJ-8JTBS4qz9QFqcb0FTgdXrjvNWSVunm_Qalj1v36ZcDpLBC7BvO1pgrE/exec";
 //URL for web service
-
 
 const questionTest = [
   {
@@ -49,12 +49,7 @@ const questionLive = [
   {
     question:
       "Name the Steelers defensive player who won the NFL Defensive Player of the Year Award in 2020",
-    options: [
-      "Mean Joe Green",
-      "Casey Hampton",
-      "TJ Watt",
-      "Coach Cahrr",
-    ],
+    options: ["Mean Joe Green", "Casey Hampton", "TJ Watt", "Coach Cahrr"],
     answer: "TJ Watt",
   },
   {
@@ -64,8 +59,7 @@ const questionLive = [
     answer: "Patriots",
   },
   {
-    question:
-      "Which Steeler has been the MVP in more than one Super Bowl?",
+    question: "Which Steeler has been the MVP in more than one Super Bowl?",
     options: [
       "Ben Roethlisberger",
       "Franco Harris",
@@ -136,8 +130,8 @@ function chooseOption(selected) {
 
     //   resultsHtml += `<button class="btn btn-primary btn-block" onclick="location.reload()">Play Again</button>`;
     document.getElementById("quiz").innerHTML = resultsHtml;
-    postScore(userName, score)
-    getLeaderboard()
+    postScore(userName, score);
+    getLeaderboard();
   }
 }
 
@@ -168,7 +162,7 @@ function startTimer(duration, display) {
 }
 
 function endQuiz() {
-console.log('EndQuiz');
+  console.log("EndQuiz");
   clearInterval(timerInterval);
   document.getElementById("quiz").innerHTML =
     `<h2 class="text-center">Time's up, ${userName}!</h2>` +
@@ -186,8 +180,8 @@ console.log('EndQuiz');
 
   //   resultsHtml += `<button class="btn btn-primary btn-block" onclick="location.reload()">Play Again</button>`;
   document.getElementById("quiz").innerHTML = resultsHtml;
-  postScore(userName, score)
-  getLeaderboard()
+  postScore(userName, score);
+  getLeaderboard();
 }
 
 function startGame() {
@@ -199,56 +193,69 @@ function startGame() {
   showQuestion();
 }
 
-
 function postScore(name, score) {
-  console.log('Posting score')
-    const data = { name: name, score: score };
+  console.log("Posting score");
+  const data = { name: name, score: score };
 
-    fetch(url, {
-        method: 'POST',
-        contentType: 'application/json',
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+  fetch(url, {
+    method: "POST",
+    contentType: "application/json",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
     })
     .catch((error) => {
-        console.error('Error:', error);
+      console.error("Error:", error);
     });
 }
 
 function getLeaderboard() {
-  const url = 'https://script.google.com/macros/s/AKfycbxPdNTt_3hJ-8JTBS4qz9QFqcb0FTgdXrjvNWSVunm_Qalj1v36ZcDpLBC7BvO1pgrE/exec'
-    console.log('Getting leaderboard data');
-    fetch(url, {
-        mode: 'cors'
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-        displayLeaderboard(data); // Function to handle the display of leaderboard data
+  const url =
+    "https://script.google.com/macros/s/AKfycbxPdNTt_3hJ-8JTBS4qz9QFqcb0FTgdXrjvNWSVunm_Qalj1v36ZcDpLBC7BvO1pgrE/exec";
+  console.log("Getting leaderboard data");
+  fetch(url, {
+    mode: "cors",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      displayLeaderboard(data); // Function to handle the display of leaderboard data
     })
     .catch((error) => {
-        console.error('Error:', error);
+      console.error("Error:", error);
     });
 }
 
 function displayLeaderboard(data) {
-  console.log('Displaying leaderboard data')
-  const leaderboardBody = document.getElementById('leaderboard-entries');
-  leaderboardBody.innerHTML = ''; // Clear existing leaderboard entries
+  const leaderboardBody = document.getElementById("leaderboard-entries");
+  leaderboardBody.innerHTML = "";
+
+  let currentRank = 1;
+  let previousScore = null;
+  let playersAtCurrentRank = 0;
 
   data.forEach((entry, index) => {
-      const row = `<tr>
-                      <td>${index + 1}</td>
-                      <td>${entry.name}</td>
-                      <td>${entry.score}</td>
-                   </tr>`;
-      leaderboardBody.innerHTML += row;
+    if (previousScore !== entry.score) {
+      previousScore = entry.score;
+      currentRank += playersAtCurrentRank;
+      playersAtCurrentRank = 1;
+    } else {
+      playersAtCurrentRank++;
+    }
+
+    let rowClass = currentRank === 1 ? "first-place" : ""; // Add 'first-place' class for 1st rank
+    let gif = currentRank === 1 ? `<img src="trophy.gif" alt="Trophy" class="trophy-icon">` : `<img src="loser.gif" alt="Loser" class="loser-icon">`
+    const row = `<tr>
+        <td class="${rowClass}"">${gif} ${currentRank} </td>
+        <td class="${rowClass}">${entry.name}</td>
+        <td class="${rowClass}">${entry.score}</td>
+     </tr>`;
+    leaderboardBody.innerHTML += row;
   });
 
-  document.getElementById('leaderboard').style.display = 'block'; // Show the leaderboard
+  document.getElementById("leaderboard").style.display = "block";
 }
 
 

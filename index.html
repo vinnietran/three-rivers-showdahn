@@ -32,6 +32,10 @@
       </div>
       <div id="leaderboard" class="leaderboard">
         <h2 class="leaderboard-title">Leaderboard</h2>
+        <h3>Click Refresh Leaderboard to see the most up to date scores</h3>
+        <button class="btn btn-primary btn-block" id="12" onclick="getLeaderboard()">
+          Refresh Leaderboard
+        </button>
         <table id="leaderboard-table" class="table">
           <thead>
             <tr>
@@ -42,9 +46,6 @@
           </thead>
           <tbody id="leaderboard-entries"></tbody>
         </table>
-        <button class="btn btn-primary btn-block" id="12" onclick="getLeaderboard()">
-          Refresh Leaderboard
-        </button>
       </div>
     </div>
 

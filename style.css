@@ -96,3 +96,18 @@ body {
   color: black;
   margin-bottom: 15px;
 }
+
+.trophy-icon {
+    height: 30px; /* Adjust as needed */
+    width: auto; /* Keeps the aspect ratio intact */
+    vertical-align: middle; /* Aligns the image vertically in the table cell */
+}
+
+.loser-icon {
+    height: 40px; /* Adjust as needed */
+    width: auto; /* Keeps the aspect ratio intact */
+    vertical-align: middle; /* Aligns the image vertically in the table cell */
+}
+
+
+
