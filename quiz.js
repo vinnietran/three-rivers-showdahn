@@ -9,7 +9,7 @@ const questionTest = [
     answer: "Art Rooney",
   },
 ];
-const questionLive = [
+const questionLive1 = [
   {
     question: "What year was the Pittsburgh Steelers founded?",
     options: ["1933", "1945", "1950", "1960"],
@@ -77,7 +77,64 @@ const questionLive = [
   // ... Add more questions in the same format
 ];
 
-const questions = questionTest;
+const questionsLive2 = [
+  {
+    question: "Who succeeded Chuck Noll as the head coach of the Pittsburgh Steelers?",
+    options: ["Bill Cahrr", "Mike Tomlin", "Buddy Parker", "Raymond Parker"],
+    answer: "Bill Cahrr"
+  },
+  {
+    question: "What is the name of the defensive front four of the Steelers during the 1970s?",
+    options: ["Iron Wall", "Brick Barricade", "Steel Curtain", "Gold Front"],
+    answer: "Steel Curtain"
+  },
+  {
+    question: "Who holds the Steelers' record for the most career interceptions?",
+    options: ["Troy Polamalu", "Mel Blount", "Rod Woodson", "Coach Cahrr"],
+    answer: "Mel Blount"
+  },
+  {
+    question: "What year did the Steelers move to what was then called Heinz Field?",
+    options: ["1990", "1995", "2001", "2005"],
+    answer: "2001"
+  },
+  {
+    question: "Which Steelers player won the NFL Defensive Player of the Year in 2008?",
+    options: ["Troy Polamalu", "James Harrison", "Jack Lambert", "Coach Cahrr"],
+    answer: "James Harrison"
+  },
+  {
+    question: "Who was the Steelers' first round pick in the 2004 NFL Draft?",
+    options: ["Ben Roethlisberger", "Troy Polamalu", "Santonio Holmes", "Heath Miller"],
+    answer: "Ben Roethlisberger"
+  },
+  {
+    question: "Which Steelers player was known for the 'Blonde Bomber' nickname?",
+    options: ["Terry Bradshaw", "Ben Roethlisberger", "Lynn Swann", "Coach Cahrr"],
+    answer: "Terry Bradshaw"
+  },
+  {
+    question: "What is the nickname of the Steelers' fan base?",
+    options: ["Steelers Nation", "Steel Curtain", "Steel Army", "Black and Gold Brigade"],
+    answer: "Steelers Nation"
+  },
+  {
+    question: "Which college did Steelers great 'Mean Joe' Greene attend?",
+    options: ["North Texas", "Alabama", "Notre Dame", "Penn State"],
+    answer: "North Texas"
+  },
+  {
+    question: "Who was the Steelers' starting quarterback before Ben Roethlisberger?",
+    options: ["Tommy Maddox", "Kordell Stewart", "Terry Bradshaw", "Coach Cahrr"],
+    answer: "Tommy Maddox"
+  }
+
+
+
+]
+
+
+const questions = questionsLive2;
 let currentQuestionIndex = 0;
 let score = 0;
 let userName = "";
@@ -246,7 +303,7 @@ function displayLeaderboard(data) {
     }
 
     let rowClass = currentRank === 1 ? "first-place" : ""; // Add 'first-place' class for 1st rank
-    let gif = currentRank === 1 ? `<img src="trophy.gif" alt="Trophy" class="trophy-icon">` : `<img src="loser.gif" alt="Loser" class="loser-icon">`
+    let gif = currentRank === 1 ? `<img src="coach_cahrr.webp" alt="Trophy" class="trophy-icon">` : `<img src="loser.gif" alt="Loser" class="loser-icon">`
     const row = `<tr>
         <td class="${rowClass}"">${gif} ${currentRank} </td>
         <td class="${rowClass}">${entry.name}</td>
