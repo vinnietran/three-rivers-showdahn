@@ -246,7 +246,7 @@ function startGame() {
   document.getElementById("nameInput").parentNode.style.display = "none";
   document.getElementById("12").style.display = "none";
   // Start the timer with 3 minutes (3 * 60 seconds)
-  startTimer(5, document.querySelector("#timer"));
+  startTimer(180, document.querySelector("#timer"));
   showQuestion();
 }
 
