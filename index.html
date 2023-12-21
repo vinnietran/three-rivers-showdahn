@@ -13,23 +13,44 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1 class="text-center mb-4">Three Rivers Trivia Will Be Available Soon!</h1>
-      <!-- <div id="game">
+    <div class="container" id="main-game">
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❄</div>
+      <h1 class="text-center mb-4">Three Rivers Trivia Showdahn</h1>
         <div class="form-group">
           <input
             type="text"
             class="form-control"
             id="nameInput"
-            placeholder="Enter your name"
+            placeholder="First Name is Required"
+            oninput="checkInput()"
           />
         </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="LnameInput"
+            placeholder="Last Name is Required"
+            oninput="checkInput()"
+          />
+        </div>
+        <div id="towel-div">
+          <img src="giphy.gif" id="towel"></img>
+        </div>
         <div id="timer" class="text-center my-3 alert"></div>
-        <button class="btn btn-primary btn-block" id="12" onclick="startGame()">
+        <button class="btn btn-primary btn-block" id="12" onclick="startGame()" disabled>
           Start Quiz
         </button>
         <div id="quiz"></div>
-      </div> -->
+      
       <div id="leaderboard" class="leaderboard">
         <h2 class="leaderboard-title">Leaderboard</h2>
         <h3>Click Refresh Leaderboard to see the most up to date scores</h3>
@@ -48,7 +69,6 @@
         </table>
       </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

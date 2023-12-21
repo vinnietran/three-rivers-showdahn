@@ -109,5 +109,97 @@ body {
     vertical-align: middle; /* Aligns the image vertically in the table cell */
 }
 
+#towel {
+  display: inline-block;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: auto;
+  max-width: 100%;
+}
+
+#towel-div {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  #towel {
+    width: 70%; /* Larger percentage for smaller screens */
+    /* Additional mobile-specific styles if needed */
+  }
+}
+
+.snowflake {
+  position: fixed;
+  top: -10px;
+  z-index: 9999;
+  color: white;
+  font-size: 1em;
+  opacity: 0.8;
+  animation: fall 10s linear infinite, sideWays 3s ease-in-out infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
 
 
+/* Example of creating multiple snowflakes with different styles */
+.snowflake:nth-child(1) {
+  left: 10%;
+  animation-delay: 0s, 0s;
+  font-size: 0.8em;
+}
+
+.snowflake:nth-child(2) {
+  left: 20%;
+  animation-delay: 1s, 1s;
+  font-size: 1.2em;
+}
+
+.snowflake:nth-child(3) {
+  left: 30%;
+  animation-delay: 2s, 0.5s;
+  font-size: 1em;
+}
+.snowflake:nth-child(4) {
+  left: 10%;
+  animation-delay: 0s, 0s;
+  font-size: 0.8em;
+}
+
+.snowflake:nth-child(5) {
+  left: 40%;
+  animation-delay: 1s, 1s;
+  font-size: 1.2em;
+}
+
+.snowflake:nth-child(6) {
+  left: 50%;
+  animation-delay: 2s, 0.5s;
+  font-size: 1em;
+}
+.snowflake:nth-child(7) {
+  left: 60%;
+  animation-delay: 0s, 0s;
+  font-size: 0.8em;
+}
+
+.snowflake:nth-child(8) {
+  left: 70%;
+  animation-delay: 1s, 1s;
+  font-size: 1.2em;
+}
+
+.snowflake:nth-child(9) {
+  left: 80%;
+  animation-delay: 2s, 0.5s;
+  font-size: 1em;
+}
+
+/* Add more nth-child rules as needed for additional snowflakes */
