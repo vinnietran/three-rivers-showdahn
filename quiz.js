@@ -380,7 +380,7 @@ function displayLeaderboard(data) {
     leaderboardBody.innerHTML += row;
   });
 
-  document.getElementById("leaderboard").style.display = "block";
+  document.getElementById("leaderboard").style.display = "block"; //new commit
 }
 
 
