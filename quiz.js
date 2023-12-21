@@ -133,8 +133,61 @@ const questionsLive2 = [
 
 ]
 
+const questionsLive3 = [  
+{
+  question: "Who was the Steelers' starting quarterback in Super Bowl XXX?",
+  options: ["Ben Roethlisberger", "Terry Bradshaw", "Kordell Stewart", "Neil ODonnell"],
+  answer: "Neil ODonnell"
+},
+{
+  question: "In the song 'Jingle Bells', what kind of sleigh is mentioned?",
+  options: ["Covered", "Horse-drawn", "Open", "Flying"],
+  answer: "Open"
+},
+{
+  question: "Which player was the Steelers' first-round pick in the 2003 NFL Draft?",
+  options: ["Troy Polamalu", "Ben Roethlisberger", "Santonio Holmes", "Heath Miller"],
+  answer: "Troy Polamalu"
+},
+{
+  question: "In 'Frosty the Snowman', what made Frosty come to life?",
+  options: ["Magic Hat", "Christmas Spirit", "Snowfall", "Children's Wishes"],
+  answer: "Magic Hat"
+},
+{
+  question: "What number did Jack Lambert wear for the Steelers?",
+  options: ["58", "75", "32", "Coach Cahrr"],
+  answer: "58"
+},
+{
+  question: "What is the next line after 'Chestnuts roasting on an open fire' in 'The Christmas Song'?",
+  options: ["Yuletide carols being sung by a choir", "Folks dressed up like Eskimos", "Jack Frost nipping at your nose", "And folks dressed up like Eskimos"],
+  answer: "Jack Frost nipping at your nose"
+},
+{
+  question: "Which team did the Steelers beat in the AFC Championship Game to advance to Super Bowl XL?",
+  options: ["New England Patriots", "Denver Broncos", "Indianapolis Colts", "Coach Cahrr"],
+  answer: "Denver Broncos"
+},
+{
+  question: "What did my true love give to me on the eighth day of Christmas in 'The Twelve Days of Christmas'?",
+  options: ["Eight Coach Cahrrs", "Eight geese a-laying", "Eight drummers drumming", "Eight maids a-milking"],
+  answer: "Eight maids a-milking"
+},
+{
+  question: "In 'Winter Wonderland', what do we call the snowman?",
+  options: ["Parson Brown", "Frosty", "Mr. Snow", "Jack Frost"],
+  answer: "Parson Brown"
+},
+{
+  question: "In which round was Antonio Brown drafted by the Steelers?",
+  options: ["1st Round", "2nd Round", "3rd Round", "6th Round"],
+  answer: "6th Round"
+}
+]
 
-const questions = questionsLive2;
+
+const questions = questionsLive3;
 let currentQuestionIndex = 0;
 let score = 0;
 let userName = "";
@@ -159,6 +212,7 @@ function showQuestion() {
 }
 
 function chooseOption(selected) {
+  console.log(selected)
   const correct = questions[currentQuestionIndex].answer;
   if (selected !== correct) {
     incorrectAnswers.push({
@@ -218,6 +272,15 @@ function startTimer(duration, display) {
   }, 1000);
 }
 
+function checkInput() {
+  var textbox1 = document.getElementById('nameInput').value;
+  var textbox2 = document.getElementById('LnameInput').value;
+  var submitBtn = document.getElementById('12');
+
+  submitBtn.disabled = textbox1 === '' || textbox2 === '';
+}
+
+
 function endQuiz() {
   console.log("EndQuiz");
   clearInterval(timerInterval);
@@ -242,8 +305,9 @@ function endQuiz() {
 }
 
 function startGame() {
-  userName = document.getElementById("nameInput").value;
+  userName = document.getElementById("nameInput").value + " " + document.getElementById("LnameInput").value;
   document.getElementById("nameInput").parentNode.style.display = "none";
+  document.getElementById("LnameInput").parentNode.style.display = "none";
   document.getElementById("12").style.display = "none";
   // Start the timer with 3 minutes (3 * 60 seconds)
   startTimer(180, document.querySelector("#timer"));
