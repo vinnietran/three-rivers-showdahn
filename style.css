@@ -110,10 +110,26 @@ body {
 }
 
 #towel {
+  display: inline-block;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: auto;
+  max-width: 100%;
+}
+
+#towel-div {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  height: 100%; /* Ensure the div has a height */
+  width: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  #towel {
+    width: 70%; /* Larger percentage for smaller screens */
+    /* Additional mobile-specific styles if needed */
+  }
 }
 
 .snowflake {

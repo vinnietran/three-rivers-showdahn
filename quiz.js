@@ -243,6 +243,8 @@ function chooseOption(selected) {
     document.getElementById("quiz").innerHTML = resultsHtml;
     postScore(userName, score);
     getLeaderboard();
+    var towel = document.getElementById("towel-div")
+    towel.style.display = "none";
   }
 }
 
@@ -282,6 +284,8 @@ function checkInput() {
 
 
 function endQuiz() {
+  var towel = document.getElementById("towel-div")
+  towel.style.display = "none";
   console.log("EndQuiz");
   clearInterval(timerInterval);
   document.getElementById("quiz").innerHTML =
